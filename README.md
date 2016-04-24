@@ -50,7 +50,7 @@
 		pip install jinja2
 		pip install requests
 
-**3. run scripts**
+**3. Run scripts**
 ------------------
 
 
