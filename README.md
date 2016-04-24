@@ -6,7 +6,7 @@
 
 
 
-**1. please make sure you already installed pip is well**
+**1. Please make sure you already installed pip is well**
 ---------------------------------------------------------
 
  
