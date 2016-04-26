@@ -22,7 +22,7 @@ CLIENT_SECRET = "hLXU?HCktQu::1xz9EsjWMUq:yiLp2A=SgQpH4HKTgM4zFS@WMQjFtVGSYV.gu6
 # username='test'
 # password = '123qwe'
 
-username = str(raw_input('请输入用户名\n'))
+username = str(raw_input('请输入用户名:\n'))
 password = str(getpass.getpass('请输入密码:\n'))
 host_type = str(raw_input('请输入将要加入的主机类型(e.g. web):\n'))
 
@@ -230,6 +230,9 @@ def registered():
 
 @commands('update_host')
 def custom_config():
+    """
+    更新主机配置
+    """
     from jinja2 import Template
     host_key = registered()
     raw_input('按任意键继续..\n')
