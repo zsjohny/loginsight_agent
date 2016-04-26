@@ -110,8 +110,8 @@ class PreSetup(object):
             self.check_bash_return(ret_code, "安装依赖失败, 请检查安装源是否更新或手动安装！")
         if self._is_ubuntu:
             cmd1 = 'apt-get update'
-            cmd = 'apt-get -y --force-yes install git python-pip  libdbi1 libapr1 libperl5.18'
-            ret_code = bash(cmd)
+            cmd2 = 'apt-get -y --force-yes install git python-pip  libdbi1 libapr1 libperl5.18'
+            ret_code = bash('%s; %s' % (cmd1, cmd2))
             self.check_bash_return(ret_code, "安装依赖失败, 请检查安装源是否更新或手动安装！")
 
 
