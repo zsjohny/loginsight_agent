@@ -291,7 +291,7 @@ if __name__ == "__main__":
     ca()
     access_token = get_access_token()
     custom_config = custom_config()
-    print 'access_token ==', access_token
+#    print 'access_token ==', access_token
     headers = {"Authorization": access_token['token_type'] + " " + access_token['access_token']}
 
     # 获取sentry 实例

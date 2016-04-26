@@ -40,7 +40,7 @@ LogFile %ROOT%/data/nxlog.log
 
 <Output sslout>
     Module	om_ssl
-    Host	139.129.93.241
+    Host	tarantool.loginsight.cn
     Port	12000
     CAFile	%CERTDIR%/cacert.pem
     CertFile	%CERTDIR%/server.crt
