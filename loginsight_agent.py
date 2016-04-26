@@ -12,6 +12,7 @@ import time
 import sys
 import shlex
 import getpass
+import commands
 
 #http://www.loginsight.cn/o/applications/2/
 CLIENT_ID = "1S_wRvye9?Xq4mU91e!MPixJ9Qjl3yQIaW?7G=2j"
@@ -21,9 +22,9 @@ CLIENT_SECRET = "hLXU?HCktQu::1xz9EsjWMUq:yiLp2A=SgQpH4HKTgM4zFS@WMQjFtVGSYV.gu6
 # username='test'
 # password = '123qwe'
 
-username = str(raw_input('please input your usrname:\n'))
-password = str(getpass.getpass('please input your password:\n'))
-host_type = str(raw_input('please input your will add host type(e.g. web):\n'))
+username = str(raw_input('请输入用户名\n'))
+password = str(getpass.getpass('请输入密码:\n'))
+host_type = str(raw_input('请输入将要加入的主机类型(e.g. web):\n'))
 
 host_name = socket.gethostname()
 platform_info = platform.system()
@@ -227,20 +228,21 @@ def registered():
     color_print('注册成功!', 'blue')
 
 
+@commands('update_host')
 def custom_config():
     from jinja2 import Template
     host_key = registered()
-    raw_input('Press any key to continue..\n')
+    raw_input('按任意键继续..\n')
     nxlog_config = '/etc/nxlog'
     tpl_file = './nxlog.conf.tpl'
     output_file = '%s/nxlog.conf' % nxlog_config
     cert_dir = '%s/CA' % (nxlog_data_path)
     #log_name = raw_input("Please input your log name:\n")
 
-    log_path = raw_input("Please input your log path:\n")
-    streamkey = raw_input("Please input your streamkey:\n")
-    streamtype = raw_input("Please input your streamtype:\n")
-    streamtag = raw_input("Please input your streamtag:\n")
+    log_path = raw_input("请输入日志路径:\n")
+    streamkey = raw_input("请输入 streamkey:\n")
+    streamtype = raw_input("请输入 streamtype:\n")
+    streamtag = raw_input("请输入input your streamtag:\n")
 
 
     with open(tpl_file, "r") as fd:
