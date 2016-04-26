@@ -12,7 +12,7 @@ import time
 import sys
 import shlex
 import getpass
-import commands
+from commandr import command, Run
 
 #http://www.loginsight.cn/o/applications/2/
 CLIENT_ID = "1S_wRvye9?Xq4mU91e!MPixJ9Qjl3yQIaW?7G=2j"
@@ -228,7 +228,7 @@ def registered():
     color_print('注册成功!', 'blue')
 
 
-@commands('update_host')
+@command('update_host')
 def custom_config():
     """
     更新主机配置
@@ -290,6 +290,7 @@ def custom_config():
 
 
 if __name__ == "__main__":
+    Run()
     pre_setup = PreSetup()
     pre_setup.start()
     main()
