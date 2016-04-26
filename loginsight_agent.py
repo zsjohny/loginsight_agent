@@ -98,6 +98,7 @@ class PreSetup(object):
     def _rpm_repo(self):
         if self._is_redhat:
             color_print('开始安装epel源', 'green')
+            bash('yum update')
             bash('yum -y install epel-release')
 
 
@@ -108,6 +109,7 @@ class PreSetup(object):
             ret_code = bash(cmd)
             self.check_bash_return(ret_code, "安装依赖失败, 请检查安装源是否更新或手动安装！")
         if self._is_ubuntu:
+            cmd1 = 'apt-get update'
             cmd = 'apt-get -y --force-yes install git python-pip  libdbi1 libapr1 libperl5.18'
             ret_code = bash(cmd)
             self.check_bash_return(ret_code, "安装依赖失败, 请检查安装源是否更新或手动安装！")

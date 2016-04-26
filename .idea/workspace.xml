@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6863a467-4cf8-4707-b50f-597fb5362b7d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/loginsight_agent.py" afterPath="$PROJECT_DIR$/loginsight_agent.py" />
     </list>
     <ignored path="loginsight_agent.iws" />
@@ -27,8 +26,8 @@
       <file leaf-file-name="loginsight_agent.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/loginsight_agent.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3295">
-              <caret line="284" column="19" selection-start-line="284" selection-start-column="19" selection-end-line="284" selection-end-column="19" />
+            <state relative-caret-position="375">
+              <caret line="101" column="47" selection-start-line="101" selection-start-column="47" selection-end-line="101" selection-end-column="47" />
               <folding>
                 <element signature="e#78#91#0" expanded="true" />
               </folding>
@@ -361,8 +360,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/loginsight_agent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3295">
-          <caret line="284" column="19" selection-start-line="284" selection-start-column="19" selection-end-line="284" selection-end-column="19" />
+        <state relative-caret-position="375">
+          <caret line="101" column="47" selection-start-line="101" selection-start-column="47" selection-end-line="101" selection-end-column="47" />
           <folding>
             <element signature="e#78#91#0" expanded="true" />
           </folding>
