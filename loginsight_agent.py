@@ -9,7 +9,9 @@ import os
 import platform
 from jinja2 import Template
 import socket
-import urllib2
+import time
+import sys
+import shlex
 
 #http://www.loginsight.cn/o/applications/2/
 CLIENT_ID = "1S_wRvye9?Xq4mU91e!MPixJ9Qjl3yQIaW?7G=2j"
@@ -31,6 +33,104 @@ url = "http://auth.loginsight.cn/o/token/"
 headers = {"Authorization": "Basic " + base64.b64encode(CLIENT_ID + ":" + CLIENT_SECRET)}
 nxlog_data_path = '/etc/nxlog/data'
 
+def color_print(msg, color='red', exits=False):
+    """
+    Print colorful string.
+    颜色打印字符或者退出
+    """
+    color_msg = {'blue': '\033[1;36m%s\033[0m',
+                 'green': '\033[1;32m%s\033[0m',
+                 'yellow': '\033[1;33m%s\033[0m',
+                 'red': '\033[1;31m%s\033[0m',
+                 'title': '\033[30;42m%s\033[0m',
+                 'info': '\033[32m%s\033[0m'}
+    msg = color_msg.get(color, 'red') % msg
+    print msg
+    if exits:
+        time.sleep(2)
+        sys.exit()
+    return msg
+
+def bash(cmd):
+    """
+    run a bash shell command
+    执行bash命令
+    """
+    return shlex.os.system(cmd)
+
+class PreSetup(object):
+    def __init__(self):
+        self.dist = platform.linux_distribution(supported_dists=['system'])[0].lower()
+        self.version = platform.linux_distribution(supported_dists=['system'])[1]
+
+    @property
+    def _is_redhat(self):
+        if self.dist.startswith("centos") or self.dist.startswith(
+                "red") or self.dist == "fedora" or self.dist == "amazon linux ami":
+            return True
+
+    @property
+    def _is_centos7(self):
+        if self.dist.startswith("centos") and self.version.startswith("7"):
+            return True
+
+    @property
+    def _is_fedora_new(self):
+        if self.dist == "fedora" and int(self.version) >= 20:
+            return True
+
+    @property
+    def _is_ubuntu(self):
+        if self.dist == "ubuntu" or self.dist == "debian":
+            return True
+
+    def check_platform(self):
+        if not (self._is_redhat or self._is_ubuntu):
+            print(u"支持的平台: CentOS, RedHat, Fedora, Debian, Ubuntu, Amazon Linux, 暂不支持其他平台安装.")
+            exit()
+
+    @staticmethod
+    def check_bash_return(ret_code, error_msg):
+        if ret_code != 0:
+            color_print(error_msg, 'red')
+            exit()
+
+
+    def _rpm_repo(self):
+        if self._is_redhat:
+            color_print('开始安装epel源', 'green')
+            bash('yum -y install epel-release')
+
+
+    def _depend_rpm(self):
+        color_print('开始安装依赖包', 'green')
+        if self._is_redhat:
+            cmd = 'yum -y install git python-pip libdbi libdbi.so.0 libpcre.so.0 libpcre.so*'
+            ret_code = bash(cmd)
+            self.check_bash_return(ret_code, "安装依赖失败, 请检查安装源是否更新或手动安装！")
+        if self._is_ubuntu:
+            cmd = 'apt-get -y --force-yes install git python-pip  libdbi1 libapr1 libperl5.18'
+            ret_code = bash(cmd)
+            self.check_bash_return(ret_code, "安装依赖失败, 请检查安装源是否更新或手动安装！")
+
+
+    def _require_pip(self):
+        color_print('开始安装依赖pip包', 'green')
+#        bash('pip uninstall -y pycrypto')
+#        bash('rm -rf /usr/lib64/python2.6/site-packages/Crypto/')
+        ret_code = bash('pip install -r requirements.txt')
+        self.check_bash_return(ret_code, "安装Loginsight依赖的python库失败！")
+
+
+    def start(self):
+        color_print('请务必先查看https://github.com/zsjohny/loginsight_agent/blob/master/README.md')
+        time.sleep(3)
+        self.check_platform()
+        self._rpm_repo()
+        self._depend_rpm()
+        self._require_pip()
+
+#    os.system('python %s' % os.path.join(jms_dir, 'install/next.py'))
 def main():
     pathisexists=os.path.exists(nxlog_data_path)
     if platform_info == "Linux" or platform_info == "linux" :
@@ -38,22 +138,29 @@ def main():
             pass
         else:
            os.makedirs(nxlog_data_path)
+        color_print('准备安装Agent', 'green')
         if sys_type == "Ubuntu":
-            os.system('sudo apt-get install  libdbi1 libapr1 libperl5.18 -y')
+#           os.system('sudo apt-get install  libdbi1 libapr1 libperl5.18 -y')
+            color_print('Cleaning the cache...', 'yellow')
+            time.sleep(3)
+            os.system('rm -rf /tmp/nxlog-ce_2.9.1504_ubuntu_1404_amd64.deb')
             os.system('wget -P /tmp https://nxlog.co/system/files/products/files/1/nxlog-ce_2.9.1504_ubuntu_1404_amd64.deb')
             os.system('sudo dpkg -i /tmp/nxlog-ce_2.9.1504_ubuntu_1404_amd64.deb')
-            os.system('rm -rf /tmp/nxlog-ce_2.9.1504_ubuntu_1404_amd64.deb')
+            os.system('rm -rf /tmp/nxlog-ce_2.9.1504_ubuntu_1404_amd64.deb*')
         elif sys_type == "Redhat" in sys_type or sys_type =="CentOS Linux":
-            os.system('yum install -y libdbi libdbi.so.0 libpcre.so.0 libpcre.so*')
+#           os.system('yum install -y libdbi libdbi.so.0 libpcre.so.0 libpcre.so*')
+            color_print('Cleaning the cache...', 'yellow')
+            time.sleep(3)
+            os.system('rm -rf /tmp/nxlog-ce-2.9.1504-1_rhel6.x86_64.rpm*')
             os.system('wget -P /tmp https://nxlog.co/system/files/products/files/1/nxlog-ce-2.9.1504-1_rhel6.x86_64.rpm')
             os.system('rpm -ivh /tmp/nxlog-ce-2.9.1504-1_rhel6.x86_64.rpm --nodeps')
             os.system('rm -rf /tmp/nxlog-ce-2.9.1504-1_rhel6.x86_64.rpm*')
         else:
-            print "You linux system not support."
+            color_print('你的linux 衍生版不在维护范围内!')
     elif platform_info == "Windows":
-        print "Please read and install window docs."
+        color_print('请阅读window文档安装', 'red')
     else:
-        print "Not support to mac"
+        color_print('不支持mac系统', 'red')
 
 
 def ca():
@@ -72,7 +179,6 @@ def get_access_token():
     # 请求oauth access token
     print '\n\nget access token ...'
     r = requests.post(url, data={'grant_type': 'password', 'username': username, 'password':password}, headers=headers)
-    print r.text
     access_token = r.json()
     return access_token
 
@@ -172,7 +278,10 @@ def custom_config():
     #     os.system('echo $host_name')
     #     os.system('echo $tag')
 
+
 if __name__ == "__main__":
+    pre_setup = PreSetup()
+    pre_setup.start()
     main()
     ca()
     access_token = get_access_token()
@@ -184,4 +293,5 @@ if __name__ == "__main__":
     # 向sentry 实例注册主机
     data = {'host_name': host_name, 'host_type': host_type, 'system': platform_info, 'distver': '1.0', 'mac_addr': "ff-cc-cd-20-21-21" }
     r = requests.post(url="http://app.loginsight.cn/api/0/agent/hosts", data=data, headers=headers)
-    print 'registered success!', r.text
+    color_print('注册成功!', 'blue')
+    color_print('安装完成!', 'yellow')
