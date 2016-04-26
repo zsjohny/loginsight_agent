@@ -3,11 +3,10 @@
 """
 Loginsight agent scripts
 """
-import requests
 import base64
 import os
 import platform
-from jinja2 import Template
+#from jinja2 import Template
 import socket
 import time
 import sys
@@ -176,6 +175,7 @@ def ca():
 
 
 def get_access_token():
+    import requests
     # 请求oauth access token
     print '\n\nget access token ...'
     r = requests.post(url, data={'grant_type': 'password', 'username': username, 'password':password}, headers=headers)
@@ -184,6 +184,7 @@ def get_access_token():
 
 
 def refresh_access_token():
+    import requests
     print '\n\nrefresh access token...'
     # 刷新access token
     token = get_access_token()
@@ -208,6 +209,7 @@ def scan_logs():
 
 
 def custom_config():
+    from jinja2 import Template
     raw_input('Press any key to continue..\n')
     nxlog_config = '/etc/nxlog'
     tpl_file = './nxlog.conf.tpl'
@@ -280,6 +282,7 @@ def custom_config():
 
 
 if __name__ == "__main__":
+    import requests
     pre_setup = PreSetup()
     pre_setup.start()
     main()
