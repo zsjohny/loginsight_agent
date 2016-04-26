@@ -218,6 +218,7 @@ def custom_config():
     output_file = '%s/nxlog.conf' % nxlog_config
     cert_dir = '%s/CA' % (nxlog_data_path)
     #log_name = raw_input("Please input your log name:\n")
+    streamhostname = raw_input("Please input your hostname:\n")
     log_path = raw_input("Please input your log path:\n")
     streamkey = raw_input("Please input your streamkey:\n")
     streamtype = raw_input("Please input your streamtype:\n")
@@ -250,7 +251,7 @@ def custom_config():
 
     kwargs = {
     'LOG_PATH':log_path,
-    'HOSTNAME': host_name,
+    'HOSTNAME': streamhostname,
     'STREAMKEY':streamkey,
     'SREAMTYPE': streamtype,
     'STREAMRAG': streamtag,

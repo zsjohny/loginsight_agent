@@ -27,8 +27,8 @@
       <file leaf-file-name="loginsight_agent.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/loginsight_agent.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="293" column="1" selection-start-line="293" selection-start-column="1" selection-end-line="293" selection-end-column="1" />
+            <state relative-caret-position="685">
+              <caret line="253" column="30" selection-start-line="253" selection-start-column="22" selection-end-line="253" selection-end-column="30" />
               <folding>
                 <element signature="e#78#91#0" expanded="true" />
               </folding>
@@ -59,8 +59,8 @@
       <file leaf-file-name="nxlog.conf.tpl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nxlog.conf.tpl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
+            <state relative-caret-position="292">
+              <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -76,8 +76,8 @@
       <list>
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/loginsight_agent.sh" />
-        <option value="$PROJECT_DIR$/nxlog.conf.tpl" />
         <option value="$PROJECT_DIR$/loginsight_agent.py" />
+        <option value="$PROJECT_DIR$/nxlog.conf.tpl" />
       </list>
     </option>
   </component>
@@ -354,16 +354,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nxlog.conf.tpl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
+        <state relative-caret-position="292">
+          <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/loginsight_agent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="293" column="1" selection-start-line="293" selection-start-column="1" selection-end-line="293" selection-end-column="1" />
+        <state relative-caret-position="685">
+          <caret line="253" column="30" selection-start-line="253" selection-start-column="22" selection-end-line="253" selection-end-column="30" />
           <folding>
             <element signature="e#78#91#0" expanded="true" />
           </folding>

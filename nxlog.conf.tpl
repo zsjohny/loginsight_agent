@@ -28,6 +28,7 @@ LogFile %ROOT%/data/nxlog.log
     Module       im_file
     File         '{{ LOG_PATH }}'
     SavePos        TRUE
+    ReadFromLast   FALSE
     PollInterval 1
     # Explicitly set the Hostname. This defaults to the system's hostname if unset.
     Exec    $HostName = '{{ HOSTNAME }}';
