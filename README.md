@@ -57,3 +57,5 @@
 ----------
 		cd loginsight_agent
 		python loginsight_agent.py
+		
+**Simple install by shell on wiki**		
